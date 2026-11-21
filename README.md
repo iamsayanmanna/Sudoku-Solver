@@ -1,37 +1,65 @@
 # Sudoku Solver
 
-A beginner-friendly Java implementation of a 9x9 Sudoku solver using the **Backtracking** algorithm.
+A Java command-line application that solves a standard **9 × 9 Sudoku puzzle** using the backtracking algorithm.
 
-## Problem
+## Overview
 
-Fill the empty cells (`.`) in a 9x9 Sudoku board so that every row, every column, and every 3x3 sub-box contains the digits 1-9 exactly once.
+The solver fills empty cells, represented by `.`, while following the three standard Sudoku constraints:
 
-The assignment guarantees that the input board has exactly one solution.
+- Each row must contain the digits 1–9 without repetition.
+- Each column must contain the digits 1–9 without repetition.
+- Each 3 × 3 sub-grid must contain the digits 1–9 without repetition.
 
-## How it works
+The board is updated in place as the solution is searched.
 
-1. Find an empty cell (`.`).
-2. Try each digit from `1` to `9`.
-3. Use `isSafe()` to check the row, column, and 3x3 sub-box.
-4. If the digit is valid, place it and call `solveSudoku()` recursively.
-5. If that choice does not lead to a solution, reset the cell to `.` and try another digit.
+## Features
 
-## Files
+- Solves 9 × 9 Sudoku puzzles.
+- Uses recursive backtracking to explore valid choices.
+- Checks row, column, and 3 × 3 sub-grid constraints before placing a digit.
+- Restores a cell when a choice does not lead to a solution.
+- Validates the length and allowed characters of each input row.
+- Prints the completed board or reports when no solution is found.
 
-- `Main.java` - complete Java program.
-- `sample-input.txt` - sample Sudoku board.
-- `sample-output.txt` - expected solution for the sample board.
+## Requirements
 
-## Compile and run
+- Java Development Kit (JDK) installed.
+- A terminal or command prompt.
+
+Check your Java installation:
+
+```bash
+java -version
+javac -version
+```
+
+## Getting Started
+
+Clone the repository:
+
+```bash
+git clone https://github.com/iamsayanmanna/Sudoku-Solver.git
+cd Sudoku-Solver
+```
+
+Compile and run:
 
 ```bash
 javac Main.java
 java Main
 ```
 
-Paste the 9 rows from `sample-input.txt` when prompted.
+## Input Format
 
-## Sample input
+Enter exactly 9 lines, each containing exactly 9 characters.
+
+- Use digits `1` through `9` for filled cells.
+- Use a dot (`.`) for an empty cell.
+- Do not add spaces between characters in a row.
+
+## Example
+
+**Input**
 
 ```text
 53..7....
@@ -45,7 +73,7 @@ Paste the 9 rows from `sample-input.txt` when prompted.
 ....8..79
 ```
 
-## Expected output
+**Output**
 
 ```text
 Solved Sudoku:
@@ -60,17 +88,43 @@ Solved Sudoku:
 3 4 5 2 8 6 1 7 9
 ```
 
-## Complexity
+## Algorithm
+
+The solver uses backtracking:
+
+1. Find the next empty cell.
+2. Try digits from `1` to `9`.
+3. Check whether a digit is valid in the cell.
+4. If valid, place it and recursively solve the remaining board.
+5. If the recursive search fails, reset the cell to `.` and try the next digit.
+6. If no empty cells remain, the puzzle is solved.
+
+## Complexity Analysis
 
 Let `E` be the number of empty cells.
 
-- **Time:** Worst-case exponential; a simple upper-bound expression is `O(9^E x 81)`.
-- **Auxiliary space:** `O(E)` for the recursion stack. The input board is modified in place.
+| Measure | Complexity |
+| --- | --- |
+| Time | Worst-case exponential; a simple upper-bound expression is `O(9^E × 81)` |
+| Auxiliary space | `O(E)` for the recursion stack |
 
-## Input validation
+The 9 × 9 board is modified in place.
 
-The program checks that each row has exactly 9 characters and that each cell contains `1`-`9` or `.`. It does not separately validate conflicts among the initial clues; the assignment guarantees a valid board with one solution.
+## Input Assumptions and Limitations
 
-## Language
+- The program checks row length and allowed input characters.
+- It does not separately validate conflicts among the initially provided clues.
+- The solver is designed for standard 9 × 9 Sudoku puzzles. The puzzle used in the example has a unique solution.
 
-Java
+## Project Structure
+
+```text
+Sudoku-Solver/
+├── Main.java
+├── sample-input.txt
+└── sample-output.txt
+```
+
+## License
+
+No license has currently been specified for this repository.
